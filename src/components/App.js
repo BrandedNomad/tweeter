@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {handleInitialData} from "../actions/shared";
 import {connect} from 'react-redux'
+import LoadingBar from 'react-redux-loading'
 
 import Dashboard from "./Dashboard";
 
@@ -16,6 +17,7 @@ class App extends Component {
 
     return (
       <div>
+          <LoadingBar/>
           {this.props.loading === true
               ? null
               :<Dashboard/>
