@@ -1,13 +1,15 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
 import {handleAddTweet} from "../actions/tweets";
+import {Redirect} from 'react-router-dom'
 
 class NewTweet extends Component {
 
     constructor(props) {
         super(props);
         this.state={
-            text:""
+            text:"",
+            toHome:false
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -28,14 +30,22 @@ class NewTweet extends Component {
         const {dispatch,id} = this.props
         dispatch(handleAddTweet(text,id))
         this.setState(()=>{
-            return {text:''}
+            return {
+                text:'',
+                toHome:id ? false : true
+            }
         })
 
     }
 
     render(){
 
-        const {text} = this.state
+        const {text,toHome} = this.state
+
+        if(toHome){
+            return <Redirect to='/'/>
+        }
+
         const tweetLeft = 280 - text.length
 
         {/* todo: redirect to the homeview when submitted*/}
